@@ -28,18 +28,17 @@ public class Category {
     @Column
     private Timestamp fechaHora;
 
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "category")
     Set<Product> products = new HashSet<>();
 
     public Category() {
     }
 
-    public Category(String name, String description, String image, Boolean state, Set<Product> products) {
+    public Category(String name, String description, String image, Boolean state) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.state = state;
-        this.products = products;
     }
 
     public long getId() {

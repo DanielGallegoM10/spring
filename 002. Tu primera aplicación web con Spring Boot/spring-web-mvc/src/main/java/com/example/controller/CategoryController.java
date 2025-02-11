@@ -5,10 +5,7 @@ import com.example.entity.Product;
 import com.example.repository.CategoryRepostory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -35,6 +32,12 @@ public class CategoryController {
     public String getForm(Model model){
         model.addAttribute("categories", new Category());
         return "category-form";
+    }
+
+    @PostMapping
+    public String save(@ModelAttribute("category") Category category){
+        this.repostory.save(category);
+        return "redirect:/categories";
     }
 
     @GetMapping("/{id}/view")
@@ -79,6 +82,15 @@ public class CategoryController {
         }
     }
 
+    @PostMapping("/delete/all")
+    public String deleteAll(RedirectAttributes redirectAttributes){
+        this.repostory.deleteAll();
+
+        redirectAttributes.addFlashAttribute("message", "Todas las categorias han sido eliminadas.");
+        redirectAttributes.addFlashAttribute("alert", "success");
+        return "redirect:/categories";
+    }
+
     @GetMapping("/search")
     public String search(@RequestParam("keyword") String keyword, Model model){
 
@@ -86,7 +98,5 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         return "category-search";
     }
-    
-
 
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface CategoryRepostory extends JpaRepository<Category, Long> {
     Optional<Category> findByName(String name);
 
-    List<Category> findCategoriesByImageIsEmpty();
+    List<Category> findByImageIsNull();
 
     List<Category> findCategoriesByStateIsTrue();
 
