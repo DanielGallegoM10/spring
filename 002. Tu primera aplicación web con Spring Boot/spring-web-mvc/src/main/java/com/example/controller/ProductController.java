@@ -36,7 +36,7 @@ public class ProductController {
     /*
     GET http://localhost:8080/products/new
      */
-    
+
     @GetMapping("/new")
     public String getForm(Model model){
         model.addAttribute("products", new Product());
