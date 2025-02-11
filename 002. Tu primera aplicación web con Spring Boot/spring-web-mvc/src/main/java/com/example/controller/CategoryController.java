@@ -68,6 +68,14 @@ public class CategoryController {
         }
     }
 
+    @PostMapping("/{id}/edit")
+    public String update(@ModelAttribute("category") Category  category, RedirectAttributes redirectAttributes){
+        this.repostory.save(category);
+        redirectAttributes.addFlashAttribute("message", "Categoria modificada con éxito");
+        redirectAttributes.addFlashAttribute("alert", "success");
+        return "redirect:/categories";
+    }
+
     @GetMapping("/{id}/delete")
     public String deleteCategory(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes){
         Optional<Category> category = repostory.findById(id);
@@ -82,6 +90,21 @@ public class CategoryController {
         }
     }
 
+    @PostMapping("/{id}/delete")
+    public String delete(@ModelAttribute("category") Category category, RedirectAttributes redirectAttributes){
+        this.repostory.delete(category);
+        redirectAttributes.addFlashAttribute("message", "Categoria eliminada con éxito");
+        redirectAttributes.addFlashAttribute("alert", "success");
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/delete/all")
+    public String deleteAllQuest(Model model){
+        // Aquí se podrían validar los permisos de borrado del usuario, por ejemplo.
+        model.addAttribute("total", this.repostory.count());
+        return "category-delete-all";
+    }
+
     @PostMapping("/delete/all")
     public String deleteAll(RedirectAttributes redirectAttributes){
         this.repostory.deleteAll();
@@ -94,7 +117,7 @@ public class CategoryController {
     @GetMapping("/search")
     public String search(@RequestParam("keyword") String keyword, Model model){
 
-        List<Category> categories = this.repostory.findCategoriesByDescription(keyword);
+        List<Category> categories = this.repostory.findAllByDescriptionContaining(keyword);
         model.addAttribute("categories", categories);
         return "category-search";
     }

@@ -41,6 +41,15 @@ public class Category {
         this.state = state;
     }
 
+    public Category(String name, String description, String image, Boolean state, Timestamp fechaHora, Set<Product> products) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.state = state;
+        this.fechaHora = fechaHora;
+        this.products = products;
+    }
+
     public long getId() {
         return id;
     }
