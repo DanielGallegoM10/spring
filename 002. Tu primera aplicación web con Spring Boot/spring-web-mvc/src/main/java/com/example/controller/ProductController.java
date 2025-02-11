@@ -24,6 +24,7 @@ public class ProductController {
     /*
     GET http://localhost:8080/products
      */
+    
     @GetMapping
     public String findAll(Model model){
 
