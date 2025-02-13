@@ -20,14 +20,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public Product() {
     }
 
@@ -70,6 +62,14 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -77,6 +77,7 @@ public class Product {
                 ", title='" + title + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", category=" +category.getName() +
                 '}';
     }
 }

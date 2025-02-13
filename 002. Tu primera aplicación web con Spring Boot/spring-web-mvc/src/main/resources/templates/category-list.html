@@ -47,8 +47,13 @@
                 <tr th:each="category: ${categories}">
                     <th scope="row" th:text="${category.id}"></th>
                     <td th:text="${category.name}"></td>
-                    <td th:text="${category.image}"></td>
-                    <td th:text="${category.state}"></td>
+                    <td>
+                        <img th:src="${category.image}" alt="Imagen de categoría" width="100">
+                    </td>
+                    <td>
+                        <span th:if="${category.state}" class="badge bg-success">Activa</span>
+                        <span th:unless="${category.state}" class="badge bg-danger">Inactiva</span>
+                    </td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/categories/{id}/view(id=${category.id})}">Ver</a>
                         <a class="btn btn-success" th:href="@{/categories/{id}/edit(id=${category.id})}">Editar</a>

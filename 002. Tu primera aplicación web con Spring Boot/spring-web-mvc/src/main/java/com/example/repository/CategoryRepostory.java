@@ -1,7 +1,6 @@
 package com.example.repository;
 
 import com.example.entity.Category;
-import com.example.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +11,9 @@ import java.util.Optional;
 public interface CategoryRepostory extends JpaRepository<Category, Long> {
     Optional<Category> findByName(String name);
 
-    List<Category> findByImageIsNull();
+    List<Category> findAllByImageIsNull();
 
-    List<Category> findCategoriesByStateIsTrue();
+    List<Category> findAllByStateIsTrue();
 
     List<Category> findAllByDescriptionContaining(String text);
 }

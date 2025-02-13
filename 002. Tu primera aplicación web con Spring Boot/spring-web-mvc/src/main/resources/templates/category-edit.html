@@ -22,11 +22,12 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Imagen</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*" th:value="*{category.image}" required>
+            <input type="text" class="form-control" id="image" name="image" placeholder="Dime el url de la imagen" th:value="*{category.image}" required>
         </div>
         <div class="mb-3 form-check">
-            <label for="state" class="form-check-label">Estado</label>
+            <label for="state" class="form-check-label">Estado
             <input type="checkbox" class="form-check-input" id="state" name="state" th:value="*{category.state}" checked>
+            </label>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a class="btn btn-secondary" th:href="@{/categories}">Volver</a>

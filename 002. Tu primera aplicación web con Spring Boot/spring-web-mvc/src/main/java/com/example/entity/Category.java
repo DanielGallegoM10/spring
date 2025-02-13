@@ -2,7 +2,7 @@ package com.example.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,28 +26,22 @@ public class Category {
     private Boolean state;
 
     @Column
-    private Timestamp fechaHora;
+    private LocalDateTime fechaHora;
 
     @OneToMany(mappedBy = "category")
     Set<Product> products = new HashSet<>();
 
     public Category() {
+        this.fechaHora = LocalDateTime.now();
     }
+
 
     public Category(String name, String description, String image, Boolean state) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.state = state;
-    }
-
-    public Category(String name, String description, String image, Boolean state, Timestamp fechaHora, Set<Product> products) {
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.state = state;
-        this.fechaHora = fechaHora;
-        this.products = products;
+        this.fechaHora = LocalDateTime.now();
     }
 
     public long getId() {
@@ -90,11 +84,11 @@ public class Category {
         this.state = state;
     }
 
-    public Timestamp getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Timestamp fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -115,7 +109,6 @@ public class Category {
                 ", image='" + image + '\'' +
                 ", state=" + state +
                 ", fechaHora=" + fechaHora +
-                ", products=" + products +
                 '}';
     }
 }
