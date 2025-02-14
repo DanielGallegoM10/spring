@@ -28,13 +28,12 @@ public class Category {
     @Column
     private LocalDateTime fechaHora;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", orphanRemoval = false)
     Set<Product> products = new HashSet<>();
 
     public Category() {
         this.fechaHora = LocalDateTime.now();
     }
-
 
     public Category(String name, String description, String image, Boolean state) {
         this.name = name;

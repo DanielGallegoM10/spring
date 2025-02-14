@@ -17,10 +17,18 @@ public class Product {
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = true)
     private Category category;
 
     public Product() {
+    }
+
+    public Product(Long id, String title, Double price, Integer quantity, Category category) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
     }
 
     public Product(Long id, String title, Double price, Integer quantity) {
@@ -66,7 +74,7 @@ public class Product {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCat0egory(Category category) {
         this.category = category;
     }
 
@@ -77,7 +85,7 @@ public class Product {
                 ", title='" + title + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", category=" +category.getName() +
+                ", category=" + category.getName() +
                 '}';
     }
 }

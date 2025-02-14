@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.Product;
+import com.example.repository.CategoryRepostory;
 import com.example.repository.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductRepository repository;
+    private final CategoryRepostory categoryRepostory;
 
-    public ProductController(ProductRepository repository) {
+    public ProductController(ProductRepository repository, CategoryRepostory categoryRepostory) {
         this.repository = repository;
+        this.categoryRepostory = categoryRepostory;
     }
 
     /*
@@ -40,6 +43,7 @@ public class ProductController {
     @GetMapping("/new")
     public String getForm(Model model){
         model.addAttribute("products", new Product());
+        model.addAttribute("categories", categoryRepostory.findAllByStateTrue());
         return "product-form";
     }
 

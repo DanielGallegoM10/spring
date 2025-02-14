@@ -13,7 +13,7 @@ public interface CategoryRepostory extends JpaRepository<Category, Long> {
 
     List<Category> findAllByImageIsNull();
 
-    List<Category> findAllByStateIsTrue();
+    List<Category> findAllByStateTrue();
 
     List<Category> findAllByDescriptionContaining(String text);
 }
