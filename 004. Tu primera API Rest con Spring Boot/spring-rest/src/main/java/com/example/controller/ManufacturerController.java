@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -46,9 +47,19 @@ public class ManufacturerController {
      */
     @GetMapping("/manufacturers/{id}")
     public ResponseEntity<Manufacturer> findById(@PathVariable Long id){
-        return this.service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+//        return this.service.findById(id)
+//                .map(ResponseEntity::ok)
+//                .orElseGet(() -> ResponseEntity.notFound().build());
+
+        //ESTO ES LO MISMO PERO DE UNA MANERA MAS ENTENDIBLE, LA DE ARRIBA ES PARA PROS
+
+        Optional<Manufacturer> encontrado = this.service.findById(id);
+
+        if (encontrado.isPresent()){
+            return ResponseEntity.ok(encontrado.get());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/manufacturers")

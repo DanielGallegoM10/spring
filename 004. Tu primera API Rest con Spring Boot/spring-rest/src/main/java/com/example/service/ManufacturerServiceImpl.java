@@ -47,7 +47,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public void deleteById(Long id) {
-
+        Optional<Manufacturer> encuentro = this.repository.findById(id);
+        if (encuentro.isPresent()){
+            this.repository.deleteById(id);
+        }
     }
 
     @Override
